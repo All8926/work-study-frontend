@@ -24,6 +24,12 @@ export default [
     path: '/notice',
     component: './Notice',
   },
+  {
+    name: '意见反馈',
+    icon: 'InfoCircleOutlined',
+    path: '/feedback',
+    component: './Feedback',
+  },
 
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' },

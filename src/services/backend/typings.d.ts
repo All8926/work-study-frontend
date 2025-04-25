@@ -11,6 +11,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponsePageFeedbackVO_ = {
+    code?: number;
+    data?: PageFeedbackVO_;
+    message?: string;
+  };
+
   type BaseResponsePageNoticeVO_ = {
     code?: number;
     data?: PageNoticeVO_;
@@ -37,6 +43,50 @@ declare namespace API {
 
   type DeleteRequest = {
     id?: number;
+  };
+
+  type FeedbackAddRequest = {
+    content?: string;
+    imageList?: string[];
+    title?: string;
+  };
+
+  type FeedbackEditRequest = {
+    content?: string;
+    id?: number;
+    imageList?: string[];
+    title?: string;
+  };
+
+  type FeedbackQueryRequest = {
+    current?: number;
+    id?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    title?: string;
+  };
+
+  type FeedbackUpdateRequest = {
+    id?: number;
+    responseText?: string;
+    status?: number;
+  };
+
+  type FeedbackVO = {
+    content?: string;
+    createTime?: string;
+    id?: number;
+    imageList?: string[];
+    responseText?: string;
+    responseUserId?: number;
+    responseUserName?: string;
+    status?: number;
+    title?: string;
+    updateTime?: string;
+    user?: UserVO;
+    userId?: number;
   };
 
   type NoticeAddRequest = {
@@ -76,6 +126,19 @@ declare namespace API {
   type OrderItem = {
     asc?: boolean;
     column?: string;
+  };
+
+  type PageFeedbackVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: FeedbackVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
   };
 
   type PageNoticeVO_ = {

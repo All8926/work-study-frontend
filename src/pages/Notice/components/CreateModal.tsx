@@ -3,7 +3,7 @@ import {ProColumns, ProForm, ProFormInstance, ProFormText } from '@ant-design/pr
 import '@umijs/max';
 import { Form, message, Modal  } from 'antd';
 import React, { useRef, useState } from 'react';
-import WangEditor from "./WangEditor";
+import WangEditor from "@/components/WangEditor/index";
 
 
 

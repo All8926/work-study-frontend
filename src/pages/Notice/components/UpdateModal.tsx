@@ -2,7 +2,7 @@ import { updateNoticeUsingPost } from '@/services/backend/noticeController';
 import { ProColumns, ProForm,  ProFormText } from '@ant-design/pro-components';
 import { Form, message, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
-import WangEditor from './WangEditor';  // 导入 WangEditor 组件
+import WangEditor from '@/components/WangEditor/index';  // 导入 WangEditor 组件
 
 interface Props {
   visible: boolean;
