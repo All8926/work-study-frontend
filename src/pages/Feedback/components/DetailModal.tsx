@@ -43,23 +43,12 @@ const DetailModal: React.FC<Props> = (props) => {
       label: '创建时间',
       children: oldData?.createTime,
     },
-    // {
-    //   key: '5',
-    //   label: '详情',
-    //   children: oldData?.content,
-    //   span:2
-    // },
-    // {
-    //   key: '6',
-    //   label: '回复',
-    //   children: oldData?.responseText || '无',
-    //   span:2
-    // },
-    // {
-    //   key: '7',
-    //   label: '图片',
-    //   children: oldData?.imageList?.length ? '' : '无',
-    // },
+    {
+      key: '5',
+      label: '详情',
+      children: oldData?.content,
+      span:2
+    },
   ];
 
   /**
@@ -96,11 +85,8 @@ const DetailModal: React.FC<Props> = (props) => {
           onCancel?.();
         }}
       >
-        <Descriptions column={2} title={oldData.title} items={items} />
+        <Descriptions style={{ whiteSpace: 'pre-wrap' }} column={2} title={oldData.title} items={items} />
         <Descriptions style={{ marginTop: '15px' }} column={2}>
-          <Descriptions.Item label="详情" key={'7'} span={2}>
-            <div style={{ whiteSpace: 'pre-wrap' }}>{oldData.content}</div>
-          </Descriptions.Item>
 
           {oldData?.status !== 0 && (
             <Descriptions.Item label="回复" key={'8'} span={2}>

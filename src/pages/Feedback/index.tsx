@@ -71,6 +71,7 @@ const FeedbackPage: React.FC = () => {
       valueType: 'text',
       hideInForm: true,
       hideInSearch: true,
+      width: 50
     },
     {
       title: '标题',

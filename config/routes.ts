@@ -19,6 +19,15 @@ export default [
     ],
   },
   {
+    path: '/job',
+    icon: 'ProjectOutlined',
+    name: '岗位中心',
+    routes: [
+      { path: '/job', redirect: '/job/list' },
+      { icon: 'table', path: '/job/list', component: './JobPost',   name: '岗位列表' },
+    ],
+  },
+  {
     name: '公告管理',
     icon: 'NotificationOutlined',
     path: '/notice',

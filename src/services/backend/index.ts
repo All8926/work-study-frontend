@@ -4,11 +4,13 @@
 // API 唯一标识：
 import * as feedbackController from './feedbackController';
 import * as fileController from './fileController';
+import * as jobPostController from './jobPostController';
 import * as noticeController from './noticeController';
 import * as userController from './userController';
 export default {
   feedbackController,
   fileController,
+  jobPostController,
   noticeController,
   userController,
 };
