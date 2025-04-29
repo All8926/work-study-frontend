@@ -4,16 +4,18 @@ import {
   ProForm,
   ProFormDependency, ProFormInstance,
   ProFormRadio, ProFormText,
-  ProFormTextArea,
+  ProFormTextArea, ProFormDatePicker, ProFormDateTimePicker
 } from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, Descriptions, DescriptionsProps, Form, message, Modal, Upload} from 'antd';
+import {Button, Descriptions, DescriptionsProps, Form, message, Modal, Typography, Upload} from 'antd';
 import React, {useRef, useState} from 'react';
 import {Access} from 'umi';
 import {checkFile, checkImageFile} from "@/utils";
 import {UploadFile, UploadProps} from "antd/lib/upload/interface";
 import {uploadFileUsingPost} from "@/services/backend/fileController";
 import {UploadOutlined} from "@ant-design/icons";
+import dayjs from "dayjs";
+import {addJobApplicationUsingPost} from "@/services/backend/jobApplicationController";
 
 interface Props {
   oldData?: API.JobPostVO;
@@ -34,24 +36,12 @@ const DetailModal: React.FC<Props> = (props) => {
   const [applyVisible, setApplyVisible] = React.useState<boolean>(false);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [pathList, setPathList] = useState<string[]>([]);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [previewTitle, setPreviewTitle] = useState('');
-  const formRef = useRef<ProFormInstance>();
-
-  const handlePreview = async (file: UploadFile) => {
-    setPreviewImage(file.url || (file.response?.data as string));
-    setPreviewTitle(file.name || '');
-    setPreviewOpen(true);
-  };
-
-  const handleCancel = () => setPreviewOpen(false);
+  const [pathList, setPathList] = useState<any[]>([]);
 
 
   const customRequest: UploadProps['customRequest'] = async ({ file, onSuccess, onError }) => {
     try {
-      const result = await uploadFileUsingPost({ biz: 'interview' }, {}, file as File);
+      const result = await uploadFileUsingPost({ biz: 'job_application' }, {}, file as File);
       (file as any).url = result.data; // 让上传组件能预览
       onSuccess?.(result, file);
     } catch (err) {
@@ -157,6 +147,26 @@ const DetailModal: React.FC<Props> = (props) => {
     }
   };
 
+  /**
+   * 申请操作
+    * @param fields
+   */
+  const handleAddApplication = async (fields: API.JobApplicationAddRequest) => {
+    console.log('fields', fields)
+    const hide = message.loading('正在操作');
+    try {
+      await addJobApplicationUsingPost(fields);
+      hide();
+      setApplyVisible(false)
+      message.success('操作成功');
+      return true;
+    } catch (error: any) {
+      hide();
+      message.error('操作失败，' + error.message);
+      return false;
+    }
+  }
+
   if (!oldData) {
     return <></>;
   }
@@ -245,21 +255,21 @@ const DetailModal: React.FC<Props> = (props) => {
           }}
           // 取消按钮操作
           onReset={ () => { setApplyVisible(false); }}
-          onFinish={async (values) => {
-            values.imageList = pathList;
+          onFinish={async (values: API.JobApplicationAddRequest) => {
+            values.fileList = pathList;
+            values.jobId = oldData.id;
             console.log('表单提交数据：', values);
-            // const success = await handleAdd(values);
-            // if (success) {
-            //   onSubmit?.(values);
-            // }
+            const success = await handleAddApplication(values);
+            if (success) {
+              onSubmit?.();
+            }
           }}
         >
-          <ProFormText rules={[{ required: true, message: '标题不能为空' }]} name="title" label="标题" />
-          <ProFormTextArea name="content" label="详情" />
-
+          <ProFormDateTimePicker  fieldProps={{disabledDate: (current) => current && current < dayjs().startOf('day')}}
+                                 name="interviewTime" label="面试时间" rules={[{ required: true, message: '面试时间不能为空' }]} />
           <Form.Item
             label="附件"
-            name="imageList"
+            name="fileList"
 
           >
             <Upload
@@ -270,19 +280,28 @@ const DetailModal: React.FC<Props> = (props) => {
               beforeUpload={(file) => checkFile(file)}
               onChange={(info) => {
                 let newFileList = [...info.fileList];
-                newFileList = newFileList.slice(-2);
+                // 限制最多上传3个文件
+                newFileList = newFileList.slice(-3);
                 console.log('fileList:', newFileList);
                 setFileList(newFileList);
                 const urls = newFileList
                   .filter((file) => file.status === 'done' && (file.url || file.response?.data))
-                  .map((file) => file.url || file.response?.data);
+                  .map((file) => {
+                    return {
+                      name: file.name,
+                      url: file.url || null,
+                    }
+
+                  });
                 setPathList(urls);
               }}
 
             >
                <Button icon={<UploadOutlined />}>上传</Button>
+              <Typography.Link  type={'secondary'} > (只支持上传图片和pdf文件)</Typography.Link >
             </Upload>
           </Form.Item>
+          <ProFormTextArea name="remark" label="备注" />
         </ProForm>
       </Modal>
     </>

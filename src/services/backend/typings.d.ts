@@ -11,6 +11,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseListUserVO_ = {
+    code?: number;
+    data?: UserVO[];
+    message?: string;
+  };
+
   type BaseResponseLong_ = {
     code?: number;
     data?: number;
@@ -20,6 +26,18 @@ declare namespace API {
   type BaseResponsePageFeedbackVO_ = {
     code?: number;
     data?: PageFeedbackVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageHiringRecordVO_ = {
+    code?: number;
+    data?: PageHiringRecordVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageJobApplicationVO_ = {
+    code?: number;
+    data?: PageJobApplicationVO_;
     message?: string;
   };
 
@@ -96,6 +114,90 @@ declare namespace API {
     responseUserName?: string;
     status?: number;
     title?: string;
+    updateTime?: string;
+    user?: UserVO;
+    userId?: number;
+  };
+
+  type HiringRecordAddRequest = {
+    fileList?: Record<string, any>[];
+    hireDate?: string;
+    remark?: string;
+    userId?: number;
+  };
+
+  type HiringRecordEditRequest = {
+    fileList?: Record<string, any>[];
+    id?: number;
+    remark?: string;
+    status?: number;
+  };
+
+  type HiringRecordQueryRequest = {
+    current?: number;
+    hireDate?: string;
+    id?: number;
+    pageSize?: number;
+    remark?: string;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    userName?: string;
+  };
+
+  type HiringRecordVO = {
+    createTime?: string;
+    enterPriseId?: number;
+    enterprise?: UserVO;
+    fileList?: Record<string, any>[];
+    hireDate?: string;
+    id?: number;
+    jobPost?: JobPostVO;
+    jobPostId?: number;
+    leaveDate?: string;
+    remark?: string;
+    status?: number;
+    updateTime?: string;
+    user?: UserVO;
+    userId?: number;
+  };
+
+  type JobApplicationAddRequest = {
+    fileList?: Record<string, any>[];
+    interviewTime?: string;
+    jobId?: number;
+    remark?: string;
+  };
+
+  type JobApplicationEditRequest = {
+    fileList?: Record<string, any>[];
+    id?: number;
+    interviewTime?: string;
+    remark?: string;
+  };
+
+  type JobApplicationQueryRequest = {
+    current?: number;
+    id?: number;
+    jobName?: string;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+  };
+
+  type JobApplicationVO = {
+    auditExplain?: string;
+    createTime?: string;
+    enterprise?: UserVO;
+    enterpriseId?: number;
+    fileList?: Record<string, any>[];
+    id?: number;
+    interviewTime?: string;
+    job?: JobPostVO;
+    jobId?: number;
+    remark?: string;
+    status?: number;
     updateTime?: string;
     user?: UserVO;
     userId?: number;
@@ -199,6 +301,32 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: FeedbackVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageHiringRecordVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: HiringRecordVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageJobApplicationVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: JobApplicationVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;

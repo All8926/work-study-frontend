@@ -24,8 +24,15 @@ export default [
     name: '岗位中心',
     routes: [
       { path: '/job', redirect: '/job/list' },
-      { icon: 'table', path: '/job/list', component: './JobPost',   name: '岗位列表' },
+      { path: '/job/list', component: './JobPost/JobList',   name: '岗位列表' },
+      { path: '/job/application', component: './JobPost/JobApplication',   name: '申请记录' },
     ],
+  },
+  {
+    name: '录用管理',
+    icon: 'UserAddOutlined',
+    path: '/hired',
+    component: './HiringRecord',
   },
   {
     name: '公告管理',

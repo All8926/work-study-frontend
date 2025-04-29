@@ -1,9 +1,9 @@
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
-import CreateModal from './components/CreateModal';
-import UpdateModal from './components/UpdateModal';
+import CreateModal from '@/pages/JobPost/JobList/components/CreateModal';
+import UpdateModal from '@/pages/JobPost/JobList/components/UpdateModal';
 
-import DetailModal from '@/pages/JobPost/components/DetailModal';
+import DetailModal from '@/pages/JobPost/JobList/components/DetailModal';
 import {
   deleteJobPostUsingPost,
   listJobPostVoByPageUsingPost, publishJobPostUsingPost,
