@@ -70,6 +70,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
+          logo={<img alt="logo" style={{ height: '100%' }} src="/logo.png" />}
           title="勤工俭学管理系统"
           subTitle={'一个专为促进学生与用工单位之间高效合作而设计的平台。'}
           initialValues={{
@@ -98,7 +99,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined />,
                 }}
-                placeholder={'admin/test'}
+                placeholder={'admin/test1'}
                 rules={[
                   {
                     required: true,

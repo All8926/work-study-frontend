@@ -35,6 +35,18 @@ export default [
     component: './HiringRecord',
   },
   {
+    name: '考勤管理',
+    icon: 'ScheduleOutlined',
+    path: '/attendance',
+    component: './Attendance',
+  },
+  {
+    name: '薪酬管理',
+    icon: 'DollarCircleOutlined',
+    path: '/Salary',
+    component: './Salary',
+  },
+  {
     name: '公告管理',
     icon: 'NotificationOutlined',
     path: '/notice',

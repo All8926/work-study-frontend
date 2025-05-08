@@ -47,6 +47,14 @@ export async function editHiringRecordUsingPost(
   });
 }
 
+/** getUserList GET /hiringRecord/get/user */
+export async function getUserListUsingGet(options?: { [key: string]: any }) {
+  return request<API.BaseResponseListUserVO_>('/hiringRecord/get/user', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** listHiringRecordVOByPage POST /hiringRecord/list/page/vo */
 export async function listHiringRecordVoByPageUsingPost(
   body: API.HiringRecordQueryRequest,

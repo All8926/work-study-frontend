@@ -2,7 +2,6 @@
 
 import {Button, Descriptions, DescriptionsProps, Modal } from 'antd';
 import React from 'react';
-import {Access, useAccess} from 'umi';
 
 interface Props {
   oldData?: API.HiringRecordVO;
@@ -17,8 +16,7 @@ interface Props {
  * @constructor
  */
 const DetailModal: React.FC<Props> = (props) => {
-  const {oldData, visible, onCancel, onSubmit} = props;
-  const access = useAccess();
+  const {oldData, visible, onCancel,  } = props;
 
   // 状态映射表
   const statusMap: { [key: number]: string } = {

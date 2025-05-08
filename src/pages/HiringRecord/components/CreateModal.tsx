@@ -59,7 +59,7 @@ const CreateModal: React.FC<Props> = (props) => {
   const handleGetInterviewer = async () => {
     try {
       const result = await getInterviewPassedUserUsingGet();
-      setInterviewerUser(result.data)
+      setInterviewerUser(result.data || [])
     } catch (error: any) {
       message.error('获取失败，' + error.message);
     }

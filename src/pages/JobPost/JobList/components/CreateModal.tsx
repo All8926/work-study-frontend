@@ -1,11 +1,8 @@
 import {addJobPostUsingPost} from '@/services/backend/jobPostController';
-import {uploadFileUsingPost} from '@/services/backend/fileController';
-import {ProColumns, ProForm, ProFormInstance, ProFormText, ProFormTextArea, ProTable} from '@ant-design/pro-components';
+import {ProColumns,   ProTable} from '@ant-design/pro-components';
 import '@umijs/max';
-import {Form, message, Modal, Upload} from 'antd';
-import {UploadFile, UploadProps} from 'antd/lib/upload/interface';
-import React, {useRef, useState} from 'react';
-import {checkImageFile} from '@/utils';
+import { message, Modal } from 'antd';
+import React, { } from 'react';
 
 interface Props {
   visible: boolean;

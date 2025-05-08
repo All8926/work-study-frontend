@@ -2,15 +2,15 @@ import {auditJobPostUsingPost} from '@/services/backend/jobPostController';
 import {useAccess} from '@@/exports';
 import {
   ProForm,
-  ProFormDependency, ProFormInstance,
-  ProFormRadio, ProFormText,
-  ProFormTextArea, ProFormDatePicker, ProFormDateTimePicker
+  ProFormDependency,
+  ProFormRadio,
+  ProFormTextArea, ProFormDateTimePicker
 } from '@ant-design/pro-components';
 import '@umijs/max';
 import {Button, Descriptions, DescriptionsProps, Form, message, Modal, Typography, Upload} from 'antd';
-import React, {useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {Access} from 'umi';
-import {checkFile, checkImageFile} from "@/utils";
+import {checkFile, } from "@/utils";
 import {UploadFile, UploadProps} from "antd/lib/upload/interface";
 import {uploadFileUsingPost} from "@/services/backend/fileController";
 import {UploadOutlined} from "@ant-design/icons";

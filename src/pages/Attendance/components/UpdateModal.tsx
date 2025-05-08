@@ -1,14 +1,16 @@
-import { editJobPostUsingPost } from '@/services/backend/jobPostController';
-import {ProColumns,  ProTable} from '@ant-design/pro-components';
-import '@umijs/max';
-import {  message, Modal,  } from 'antd';
-import React, {   } from 'react';
+import {editAttendanceUsingPost} from '@/services/backend/attendanceController';
+import {
+  ProColumns,  ProTable
+} from '@ant-design/pro-components';
+
+import {  message, Modal, } from 'antd';
+import React, { } from 'react';
 
 interface Props {
   visible: boolean;
-  columns: ProColumns<API.JobPostVO>[];
-  oldData: API.JobPostVO | undefined;
-  onSubmit: (values: API.JobPostAddRequest) => void;
+  columns: ProColumns<API.AttendanceVO>[];
+  oldData: API.AttendanceVO | undefined;
+  onSubmit: (values: API.AttendanceAddRequest) => void;
   onCancel: () => void;
 }
 
@@ -18,16 +20,17 @@ interface Props {
  * @constructor
  */
 const UpdateModal: React.FC<Props> = (props) => {
-  const { visible, onSubmit, onCancel, oldData ,columns} = props;
+  const {visible, onSubmit, onCancel, oldData,columns} = props;
+
 
   /**
    * 修改节点
    * @param fields
    */
-  const handleUpdate = async (fields: API.JobPostEditRequest) => {
+  const handleUpdate = async (fields: API.AttendanceUpdateRequest) => {
     const hide = message.loading('正在修改');
     try {
-      await editJobPostUsingPost(fields);
+      await editAttendanceUsingPost(fields);
       hide();
       message.success('操作成功');
       return true;
@@ -39,15 +42,15 @@ const UpdateModal: React.FC<Props> = (props) => {
   };
 
 
-
   if (!oldData) {
     return <></>;
   }
 
   return (
     <Modal
+      maskClosable={false}
       destroyOnClose
-      title={'更新'}
+      title={'修改'}
       open={visible}
       footer={null}
       onCancel={() => {
@@ -56,11 +59,20 @@ const UpdateModal: React.FC<Props> = (props) => {
     >
       <ProTable
         type="form"
-        columns={columns}
+        columns={columns.map((column) => {
+          if(column.dataIndex === 'userId'){
+            return {
+              ...column,
+              readonly: true,
+            };
+          }else {
+            return column;
+          }
+        })}
         form={{
           initialValues: oldData,
         }}
-        onSubmit={async (values: API.JobPostEditRequest) => {
+        onSubmit={async (values: API.AttendanceUpdateRequest) => {
           const success = await handleUpdate({
             ...values,
             id: oldData.id as any,

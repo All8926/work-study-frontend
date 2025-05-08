@@ -16,8 +16,6 @@ import {useModel} from "@umijs/max";
  * @constructor
  */
 const JobApplicationPage: React.FC = () => {
-  // 是否显示新建窗口
-  const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
   // 是否显示更新窗口
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
   // 是否显示查看窗口

@@ -1,4 +1,48 @@
 declare namespace API {
+  type AttendanceAddRequest = {
+    attendanceDate?: string;
+    checkInTime?: string;
+    checkOutTime?: string;
+    status?: number;
+    userId?: number;
+    workDuration?: string;
+  };
+
+  type AttendanceQueryRequest = {
+    attendanceDate?: string;
+    current?: number;
+    id?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    userName?: string;
+  };
+
+  type AttendanceUpdateRequest = {
+    attendanceDate?: string;
+    checkInTime?: string;
+    checkOutTime?: string;
+    id?: number;
+    status?: number;
+    workDuration?: string;
+  };
+
+  type AttendanceVO = {
+    attendanceDate?: string;
+    checkInTime?: string;
+    checkOutTime?: string;
+    createTime?: string;
+    enterPriseId?: number;
+    enterprise?: UserVO;
+    id?: number;
+    status?: number;
+    updateTime?: string;
+    user?: UserVO;
+    userId?: number;
+    workDuration?: string;
+  };
+
   type AuditRequest = {
     id?: number;
     reason?: string;
@@ -20,6 +64,12 @@ declare namespace API {
   type BaseResponseLong_ = {
     code?: number;
     data?: number;
+    message?: string;
+  };
+
+  type BaseResponsePageAttendanceVO_ = {
+    code?: number;
+    data?: PageAttendanceVO_;
     message?: string;
   };
 
@@ -50,6 +100,12 @@ declare namespace API {
   type BaseResponsePageNoticeVO_ = {
     code?: number;
     data?: PageNoticeVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageSalaryVO_ = {
+    code?: number;
+    data?: PageSalaryVO_;
     message?: string;
   };
 
@@ -129,6 +185,7 @@ declare namespace API {
   type HiringRecordEditRequest = {
     fileList?: Record<string, any>[];
     id?: number;
+    leaveDate?: string;
     remark?: string;
     status?: number;
   };
@@ -293,6 +350,19 @@ declare namespace API {
     column?: string;
   };
 
+  type PageAttendanceVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: AttendanceVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
   type PageFeedbackVO_ = {
     countId?: string;
     current?: number;
@@ -358,6 +428,19 @@ declare namespace API {
     total?: number;
   };
 
+  type PageSalaryVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: SalaryVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
   type PageUserVO_ = {
     countId?: string;
     current?: number;
@@ -371,14 +454,69 @@ declare namespace API {
     total?: number;
   };
 
+  type SalaryAddRequest = {
+    issueStatus?: number;
+    issueTime?: string;
+    performance?: string;
+    periodDate?: string;
+    salaryAmount?: string;
+    salaryType?: string;
+    userId?: number;
+    workDuration?: string;
+  };
+
+  type SalaryQueryRequest = {
+    current?: number;
+    id?: number;
+    issueStatus?: number;
+    pageSize?: number;
+    performance?: string;
+    periodDate?: string;
+    salaryAmount?: string;
+    salaryType?: string;
+    sortField?: string;
+    sortOrder?: string;
+    userName?: string;
+  };
+
+  type SalaryUpdateRequest = {
+    id?: number;
+    issueStatus?: number;
+    issueTime?: string;
+    performance?: string;
+    salaryAmount?: string;
+    workDuration?: string;
+  };
+
+  type SalaryVO = {
+    createTime?: string;
+    enterPriseId?: number;
+    enterprise?: UserVO;
+    id?: number;
+    issueStatus?: number;
+    issueTime?: string;
+    performance?: string;
+    periodDate?: string;
+    salaryAmount?: string;
+    salaryType?: string;
+    updateTime?: string;
+    user?: UserVO;
+    userId?: number;
+    workDuration?: string;
+  };
+
   type uploadFileUsingPOSTParams = {
     biz?: string;
   };
 
   type UserAddRequest = {
+    nickName?: string;
+    status?: number;
     userAccount?: string;
     userAvatar?: string;
     userName?: string;
+    userPhone?: string;
+    userProfile?: string;
     userRole?: string;
   };
 

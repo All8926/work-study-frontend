@@ -11,7 +11,6 @@ import {Button, Form, message, Modal, Typography, Upload} from 'antd';
 import {UploadProps} from 'antd/lib/upload/interface';
 import React, {useEffect, useRef, useState} from 'react';
 import {UploadOutlined} from "@ant-design/icons";
-import dayjs from "dayjs";
 
 interface Props {
   visible: boolean;

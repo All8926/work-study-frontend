@@ -1,7 +1,7 @@
 import { addUserUsingPost } from '@/services/backend/userController';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import '@umijs/max';
-import { message, Modal } from 'antd';
+import {message, Modal, Typography} from 'antd';
 import React from 'react';
 
 interface Props {
@@ -47,16 +47,19 @@ const CreateModal: React.FC<Props> = (props) => {
         onCancel?.();
       }}
     >
-      <ProTable
-        type="form"
-        columns={columns}
-        onSubmit={async (values: API.UserAddRequest) => {
-          const success = await handleAdd(values);
-          if (success) {
-            onSubmit?.(values);
-          }
-        }}
-      />
+  <>
+    <ProTable
+      type="form"
+      columns={columns}
+      onSubmit={async (values: API.UserAddRequest) => {
+        const success = await handleAdd(values);
+        if (success) {
+          onSubmit?.(values);
+        }
+      }}
+    />
+    <Typography.Link style={{marginTop:'20px', marginLeft:'20px', display:'block'}} type={'secondary'} >默认登录密码为123456</Typography.Link >
+  </>
     </Modal>
   );
 };

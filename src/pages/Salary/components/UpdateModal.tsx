@@ -1,14 +1,16 @@
-import { editJobPostUsingPost } from '@/services/backend/jobPostController';
-import {ProColumns,  ProTable} from '@ant-design/pro-components';
-import '@umijs/max';
-import {  message, Modal,  } from 'antd';
-import React, {   } from 'react';
+import {editSalaryUsingPost} from '@/services/backend/salaryController';
+import {
+  ProColumns,  ProTable
+} from '@ant-design/pro-components';
+
+import {  message, Modal, } from 'antd';
+import React, { } from 'react';
 
 interface Props {
   visible: boolean;
-  columns: ProColumns<API.JobPostVO>[];
-  oldData: API.JobPostVO | undefined;
-  onSubmit: (values: API.JobPostAddRequest) => void;
+  columns: ProColumns<API.SalaryVO>[];
+  oldData: API.SalaryVO | undefined;
+  onSubmit: (values: API.SalaryAddRequest) => void;
   onCancel: () => void;
 }
 
@@ -18,16 +20,17 @@ interface Props {
  * @constructor
  */
 const UpdateModal: React.FC<Props> = (props) => {
-  const { visible, onSubmit, onCancel, oldData ,columns} = props;
+  const {visible, onSubmit, onCancel, oldData,columns} = props;
+
 
   /**
    * 修改节点
    * @param fields
    */
-  const handleUpdate = async (fields: API.JobPostEditRequest) => {
+  const handleUpdate = async (fields: API.SalaryUpdateRequest) => {
     const hide = message.loading('正在修改');
     try {
-      await editJobPostUsingPost(fields);
+      await editSalaryUsingPost(fields);
       hide();
       message.success('操作成功');
       return true;
@@ -39,15 +42,15 @@ const UpdateModal: React.FC<Props> = (props) => {
   };
 
 
-
   if (!oldData) {
     return <></>;
   }
 
   return (
     <Modal
+      maskClosable={false}
       destroyOnClose
-      title={'更新'}
+      title={'修改'}
       open={visible}
       footer={null}
       onCancel={() => {
@@ -60,7 +63,7 @@ const UpdateModal: React.FC<Props> = (props) => {
         form={{
           initialValues: oldData,
         }}
-        onSubmit={async (values: API.JobPostEditRequest) => {
+        onSubmit={async (values: API.SalaryUpdateRequest) => {
           const success = await handleUpdate({
             ...values,
             id: oldData.id as any,

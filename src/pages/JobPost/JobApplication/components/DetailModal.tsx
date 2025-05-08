@@ -2,7 +2,7 @@ import {auditJobApplicationUsingPost} from '@/services/backend/jobApplicationCon
 
 import {ProForm, ProFormRadio, ProFormTextArea} from '@ant-design/pro-components';
 
-import {Button, Descriptions, DescriptionsProps, message, Modal, Typography} from 'antd';
+import {Button, Descriptions, DescriptionsProps, message, Modal,  } from 'antd';
 import React from 'react';
 import {Access, useAccess} from 'umi';
 

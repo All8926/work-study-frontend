@@ -30,7 +30,6 @@ const NoticePage: React.FC = () => {
   // 当前用户点击的数据
   const [currentRow, setCurrentRow] = useState<API.NoticeVO>();
 
-  const { initialState } = useModel('@@initialState');
   const access = useAccess();
   /**
    * 删除节点
